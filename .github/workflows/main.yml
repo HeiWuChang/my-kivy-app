@@ -4,7 +4,8 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # 强制使用一个稳定、成熟的操作系统版本，杜绝环境变化带来的问题
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -24,9 +25,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install buildozer cython
+          # 增加 setuptools 和 wheel 增强稳定性
+          pip install buildozer cython setuptools wheel
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev
+          # 使用与 ubuntu-22.04 匹配的依赖库，特别是 libtinfo5
+          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
 
       - name: Build with Buildozer
         run: |
