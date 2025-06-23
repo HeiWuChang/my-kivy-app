@@ -15,6 +15,12 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Cache Buildozer global directory
+        uses: actions/cache@v4
+        with:
+          path: ~/.buildozer
+          key: ${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
