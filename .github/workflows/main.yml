@@ -4,23 +4,38 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # 强制使用一个稳定、成熟的操作系统版本
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # 强制设置正确的 Java 17 环境，解决编译冲突
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
+      - name: Cache Buildozer global directory
+        uses: actions/cache@v4
+        with:
+          path: ~/.buildozer
+          key: ${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install buildozer cython
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 cmake libffi-dev libssl-dev
+          # 使用与 ubuntu-22.04 匹配的依赖库
+          sudo apt-get install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
 
       - name: Build with Buildozer
         run: |
