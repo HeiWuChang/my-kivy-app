@@ -16,13 +16,11 @@ requirements = python3,kivy
 # 屏幕方向
 orientation = portrait
 
-# --- 安卓生产级配置 (最终修正) ---
+# --- 安卓生产级配置 (最终稳定版) ---
 # 目标安卓 API 等级
 android.api = 33
 # 最低支持的安卓 API 等级
 android.minapi = 24
-# 明确指定一个稳定版的 NDK
-android.ndk = 25b
 # 明确指定一个稳定版的编译工具
 android.build_tools_version = 34.0.0
 # 自动接受SDK许可协议
