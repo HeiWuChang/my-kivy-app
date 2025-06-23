@@ -1,91 +1,105 @@
 [app]
 
-# (必须修改) 你的应用的标题
-title = by小磊
+# (str) 你的应用标题
+title = My First App
 
-# (必须修改) 你的应用的包名，全小写，无特殊字符
-package.name = byxiaolei
+# (str) 你的应用的包名 (全小写，无特殊字符)
+package.name = myfirstapp
 
-# (必须修改) 你的应用的域名，用于生成唯一的包ID
+# (str) 你的应用的域名 (用于生成唯一的包ID)
 package.domain = org.demo
 
-# 源文件目录，保持默认即可
+# (str) 源码目录，main.py所在的位置
 source.dir = .
 
-# 要包含的源文件扩展名，保持默认即可
+# (list) 需要包含的源文件后缀
 source.include_exts = py,png,jpg,kv,atlas
 
-# (可选) 应用的版本号
+# (list) 使用模式匹配包含的文件
+#source.include_patterns = assets/*,images/*.png
+
+# (list) 需要排除的源文件后缀
+#source.exclude_exts = spec
+
+# (list) 需要排除的目录
+#source.exclude_dirs = tests, bin, venv
+
+# (list) 使用模式匹配排除的文件
+#source.exclude_patterns = license,images/*/*.jpg
+
+# (str) 应用版本
 version = 0.1
 
-# (必须修改) App运行所需要的Python库，用逗号隔开
-# 对于我们的简单示例，只需要 python3 和 kivy
+# (list) 应用依赖的库
+# 我们这里只需要 kivy, python3 会被自动包含
 requirements = python3,kivy
 
-# (可选) App在屏幕上的方向。可以是 landscape, portrait, all
+# (str) 应用启动画面
+#presplash.filename = %(source.dir)s/data/presplash.png
+
+# (str) 应用图标
+#icon.filename = %(source.dir)s/data/icon.png
+
+# (list) 支持的屏幕方向: landscape, portrait
 orientation = portrait
 
-# (可选) 应用图标的文件名
-icon.filename = %(source.dir)s/data/icon.png
+# (list) 声明服务
+#services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
 
-# (可选) 应用启动画面的文件名
-presplash.filename = %(source.dir)s/data/presplash.png
+#
+# Android Specific
+#
 
-# (可选) 启动时是否显示安卓加载动画
-presplash.color = #FFFFFF
-
-# (可选) 是否允许 App 备份
-android.allow_backup = True
-
-# (可选) 安卓权限。如果你的App需要访问网络、摄像头等，在这里声明
-# 例如: android.permissions = INTERNET,CAMERA
-android.permissions =
-
-# (可选) 应用在最近任务列表中的窗口颜色
-android.color = #FFFFFF
-
-# (可选) 是否全屏
+# (bool) 是否全屏
 fullscreen = 0
 
-# (可选) 安卓API级别。保持默认通常是安全的
-android.api = 31
+# (string) Presplash 背景颜色
+#android.presplash_color = #FFFFFF
 
-# (可选) 安卓最低API级别
-android.minapi = 21
+# (list) 安卓权限
+#android.permissions = android.permission.INTERNET
 
-# (可选) 安卓SDK版本
-android.sdk = 24
+# (int) 目标安卓 API 等级, 越高越好
+#android.api = 31
 
-# (可选) 安卓NDK版本
-android.ndk = 25b
+# (int) 最低支持的安卓 API 等级
+#android.minapi = 21
 
-# (可选) 安卓NDK路径
-# android.ndk_path =
+# (str) 安卓 NDK 版本
+#android.ndk = 25b
 
-# (可选) 安卓SDK路径
-# android.sdk_path =
+# (str) 安卓 NDK 目录 (如果为空，会自动下载)
+#android.ndk_path =
 
-# (可选) 安卓构建工具版本
-# android.build_tools_version =
+# (str) 安卓 SDK 目录 (如果为空，会自动下载)
+#android.sdk_path =
 
-# (可选) Java JDK路径
-# android.java_home =
+# (bool) 自动接受SDK许可协议 (为解决打包问题而修改)
+# -------- 这是关键修改之一 --------
+android.accept_sdk_license = True
 
-# (可选) P4A (Python-for-Android) 的分支或版本
-# p4a.branch = master
+# (str) 安卓编译工具版本 (为解决打包问题而修改)
+# -------- 这是关键修改之二 --------
+android.build_tools_version = 34.0.0
+
+
+# (list) 安卓架构, 逗号分隔. 可选项: armeabi-v7a, arm64-v8a, x86, x86_64
+android.archs = arm64-v8a, armeabi-v7a
+
+# (bool) 启用安卓自动备份功能
+android.allow_backup = True
 
 
 [buildozer]
 
-# 日志输出级别。2 表示详细信息，对于调试很有用
+# (int) 日志等级 (0 = 仅错误, 1 = 信息, 2 = 调试)
 log_level = 2
 
-# 警告模式。0=无, 1=常规, 2=所有
+# (int) 如果以 root 身份运行 buildozer 则显示警告
 warn_on_root = 1
 
-# (可选) .buildozer 文件夹的路径
+# (str) buildozer 工作目录的路径
 # build_dir = ./.buildozer
 
-# (可选) 下载缓存的路径
-# bin_dir = ./.buildozer/bin
-
+# (str) 生成的 .apk/.aab 文件存放目录
+# bin_dir = ./bin
