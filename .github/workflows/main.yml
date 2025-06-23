@@ -12,8 +12,9 @@ jobs:
         uses: actions/checkout@v4
 
       # 直接调用专业的 Buildozer 打包工具
+      # 注意：这里是修正后的最终版本，使用了 v1 标签
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1.2.1
+        uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
           # 要执行的命令
